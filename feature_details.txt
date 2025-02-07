@@ -1,2 +1,8 @@
+<<<<<<< HEAD
+Updated content on the main branch.
+=======
+This file contains details of the new feature I plan to implement.
+>>>>>>> feature-update
+
 Updated content on the main branch.
 This file contains details of the new feature I plan to implement.
