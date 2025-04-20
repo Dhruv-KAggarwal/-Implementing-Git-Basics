@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medora - Healthcare Application</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        /* Embedded CSS for quick styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <button id="showRegister">Register</button>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="container hidden" id="registerForm">
+        <h2>Register</h2>
+        <form id="registerFormContent">
+            <input type="text" id="regName" placeholder="Name" required>
+            <input type="email" id="regEmail" placeholder="Email" required>
+            <input type="password" id="regPassword" placeholder="Password" required>
+            <select id="regRole">
+                <option value="patient">Patient</option>
+                <option value="doctor">Doctor</option>
+                <option value="chemist">Chemist</option>
+            </select>
+            <button type="submit">Register</button>
+        </form>
+        <button id="showLogin">Back to Login</button>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="container hidden" id="dashboard">
+        <h2>Dashboard</h2>
+        <p>Welcome, <span id="userName"></span>!</p>
+        <p>Your Role: <span id="userRole"></span></p>
+        <p>Your ID: <span id="userId"></span></p>
+        <button id="logout">Logout</button>
+    </div>
+
+    <script>
+        // JavaScript for handling registration, login, and dashboard
+
+        // Utility function to generate a 6-digit unique ID
+        function generateId() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // Show and hide forms
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const dashboard = document.getElementById('dashboard');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const logout = document.getElementById('logout');
+
+        showRegister.addEventListener('click', () => {
+            loginForm.parentElement.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.classList.add('hidden');
+            loginForm.parentElement.classList.remove('hidden');
+        });
+
+        logout.addEventListener('click', () => {
+            localStorage.removeItem('loggedInUser');
+            dashboard.classList.add('hidden');
+            loginForm.parentElement.classList.remove('hidden');
+        });
+
+        // Handle registration
+        document.getElementById('registerFormContent').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const role = document.getElementById('regRole').value;
+            const id = generateId();
+
+            // Get existing users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Check if email already exists
+            if (users.some(user => user.email === email)) {
+                alert('Email already registered!');
+                return;
+            }
+
+            // Add new user
+            users.push({ id, name, email, password, role });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Registration successful! Your ID is: ' + id);
+            registerForm.classList.add('hidden');
+            loginForm.parentElement.classList.remove('hidden');
+        });
+
+        // Handle login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Get users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Find user
+            const user = users.find(user => user.email === email && user.password === password);
+
+            if (user) {
+                // Save logged-in user to localStorage
+                localStorage.setItem('loggedInUser', JSON.stringify(user));
+
+                // Show dashboard
+                document.getElementById('userName').textContent = user.name;
+                document.getElementById('userRole').textContent = user.role;
+                document.getElementById('userId').textContent = user.id;
+
+                loginForm.parentElement.classList.add('hidden');
+                dashboard.classList.remove('hidden');
+            } else {
+                alert('Invalid email or password!');
+            }
+        });
+
+        // Auto-login if user is already logged in
+        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (loggedInUser) {
+            document.getElementById('userName').textContent = loggedInUser.name;
+            document.getElementById('userRole').textContent = loggedInUser.role;
+            document.getElementById('userId').textContent = loggedInUser.id;
+
+            loginForm.parentElement.classList.add('hidden');
+            dashboard.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

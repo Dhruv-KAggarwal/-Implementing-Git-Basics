@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medora Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Welcome to Medora Dashboard</h1>
+        <div id="user-info"></div>
+        <div id="role-specific-content"></div>
+        <button id="logout-btn">Logout</button>
+    </div>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userInfo = JSON.parse(localStorage.getItem('user'));
+            const userInfoDiv = document.getElementById('user-info');
+            const roleContentDiv = document.getElementById('role-specific-content');
+
+            if (userInfo) {
+                userInfoDiv.innerHTML = `<p>Logged in as: ${userInfo.name} (${userInfo.role})</p>`;
+                switch (userInfo.role) {
+                    case 'Patient':
+                        roleContentDiv.innerHTML = '<p>Here you can view your medical records and schedule appointments.</p>';
+                        break;
+                    case 'Doctor':
+                        roleContentDiv.innerHTML = '<p>Here you can manage your patients and view appointments.</p>';
+                        break;
+                    case 'Chemist':
+                        roleContentDiv.innerHTML = '<p>Here you can manage prescriptions and inventory.</p>';
+                        break;
+                    default:
+                        roleContentDiv.innerHTML = '<p>Role not recognized.</p>';
+                }
+            } else {
+                userInfoDiv.innerHTML = '<p>No user is logged in.</p>';
+            }
+
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                localStorage.removeItem('user');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
