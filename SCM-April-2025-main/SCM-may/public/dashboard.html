@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Doctor Dashboard - Medora</title>
+  <title>Dashboard - Medora</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-deep-blue: #0F172A;
-      --gradient-purple: #6D28D9;
-      --gradient-blue: #2563EB;
-      --gradient-magenta: #C026D3;
-      --button-blue: #3B82F6;
-      --button-indigo: #6366F1;
-      --text-white: #FFFFFF;
-      --text-grey: #94A3B8;
+      --bg-deep-blue: #0a0a0f;
+      --bg-card: #121218;
+      --gradient-purple: #7c3aed;
+      --gradient-blue: #3b82f6;
+      --gradient-magenta: #c026d3;
+      --button-blue: #2563eb;
+      --button-indigo: #4f46e5;
+      --text-white: #ffffff;
+      --text-grey: #9ca3af;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --hover-color: rgba(255, 255, 255, 0.05);
     }
 
     * {
@@ -27,18 +30,20 @@
       color: var(--text-white);
       min-height: 100vh;
       background-image: 
-        radial-gradient(circle at 20% 20%, rgba(109, 40, 217, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 50%);
+        radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        linear-gradient(45deg, rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 0.98));
     }
 
     header {
-      background: rgba(15, 23, 42, 0.7);
+      background: rgba(18, 18, 24, 0.8);
       backdrop-filter: blur(10px);
       padding: 1.5rem;
       text-align: center;
       font-size: 1.8rem;
       font-weight: 600;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid var(--border-color);
     }
 
     main {
@@ -54,18 +59,19 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-card);
       backdrop-filter: blur(10px);
-      border-radius: 20px;
+      border-radius: 16px;
       padding: 2rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     h2 {
@@ -89,38 +95,38 @@
       color: var(--text-white);
       border: none;
       padding: 1rem 2rem;
-      border-radius: 15px;
+      border-radius: 12px;
       cursor: pointer;
       font-size: 1rem;
       font-weight: 500;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
     }
 
     button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
     }
 
     #patientForm {
       margin-top: 2rem;
       padding: 2rem;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-card);
       backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
       animation: slideIn 0.5s ease;
     }
 
     #reports {
       margin-top: 2rem;
       padding: 2rem;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-card);
       backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
       animation: fadeIn 0.5s ease;
     }
 
@@ -138,9 +144,9 @@
     input {
       width: 100%;
       padding: 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
       color: var(--text-white);
       font-size: 1rem;
       transition: all 0.3s ease;
@@ -149,8 +155,8 @@
     input:focus {
       outline: none;
       border-color: var(--button-blue);
-      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
-      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .report-list {
@@ -159,16 +165,18 @@
 
     .report-item {
       padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
       margin-bottom: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border-color);
       transition: all 0.3s ease;
+      position: relative;
     }
 
     .report-item:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--hover-color);
       transform: translateX(5px);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .report-item h4 {
@@ -182,6 +190,39 @@
       color: var(--text-grey);
     }
 
+    .edit-button {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, var(--gradient-purple), var(--gradient-magenta));
+      color: var(--text-white);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+    }
+
+    .edit-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(192, 38, 211, 0.3);
+    }
+
+    .edit-form {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    .edit-form.active {
+      display: block;
+      animation: slideIn 0.3s ease;
+    }
+
     .logout-link {
       display: inline-block;
       margin-top: 2rem;
@@ -193,7 +234,7 @@
 
     .logout-link:hover {
       color: var(--text-white);
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     }
 
     @keyframes slideIn {
@@ -220,7 +261,7 @@
       main {
         padding: 0 1rem;
       }
-      
+
       .card {
         padding: 1.5rem;
       }
@@ -229,25 +270,30 @@
 </head>
 <body>
   <header>
-    Doctor Dashboard
+    <span id="userRole">Dashboard</span>
   </header>
   <main>
-    <h2>Welcome, Doctor</h2>
+    <h2>Welcome, <span id="userName"></span></h2>
     <div class="dashboard-container">
       <div class="card">
-        <div class="button-group">
-          <button onclick="window.location.href='upload.html'">Upload Data</button>
-          <button onclick="showPatientForm()">View Patient Reports</button>
+        <div class="button-group" id="actionButtons">
+          <!-- Buttons will be dynamically added here -->
         </div>
       </div>
     </div>
 
-    <div id="patientForm" style="display:none;">
-      <h3>View Reports for Patient</h3>
+    <div id="patientForm" style="display: none">
+      <h3>View Reports</h3>
       <form id="viewForm">
         <div class="form-group">
           <label for="patientId">Patient ID</label>
-          <input type="text" id="patientId" name="patientId" required placeholder="Enter Patient ID">
+          <input
+            type="text"
+            id="patientId"
+            name="patientId"
+            required
+            placeholder="Enter Patient ID"
+          />
         </div>
         <button type="submit">View Reports</button>
       </form>
@@ -257,33 +303,118 @@
     <a href="index.html" class="logout-link">Logout</a>
   </main>
   <script>
-    function showPatientForm() {
-      document.getElementById('patientForm').style.display = 'block';
-      document.getElementById('reports').innerHTML = '';
+    const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+
+    // Update header and welcome message
+    document.getElementById("userRole").textContent =
+      user.role.charAt(0).toUpperCase() + user.role.slice(1) + " Dashboard";
+    document.getElementById("userName").textContent = user.name;
+
+    // Show appropriate buttons based on role
+    const actionButtons = document.getElementById("actionButtons");
+    if (user.role === "doctor") {
+      actionButtons.innerHTML = `
+      <button onclick="window.location.href='upload.html'">Upload Data</button>
+      <button onclick="showPatientForm()">View Patient Reports</button>
+    `;
+    } else if (user.role === "chemist") {
+      actionButtons.innerHTML = `
+      <button onclick="window.location.href='upload.html'">Upload Data</button>
+      <button onclick="showPatientForm()">View Patient Reports</button>
+    `;
+    } else if (user.role === "patient") {
+      actionButtons.innerHTML = `
+      <button onclick="showPatientForm()">View My Reports</button>
+    `;
+      // Auto-fill patient ID for patients
+      document.getElementById("patientId").value = user.id;
+      document.getElementById("patientId").readOnly = true;
     }
 
-    document.getElementById('viewForm').onsubmit = async function(e) {
+    function showPatientForm() {
+      document.getElementById("patientForm").style.display = "block";
+      document.getElementById("reports").innerHTML = "";
+    }
+
+    function showEditForm(reportId) {
+      const form = document.getElementById(`editForm-${reportId}`);
+      form.classList.toggle("active");
+    }
+
+    async function editReport(reportId) {
+      const form = document.getElementById(`editForm-${reportId}`);
+      const reportType = form.querySelector('[name="reportType"]').value;
+      const reportContent = form.querySelector(
+        '[name="reportContent"]'
+      ).value;
+
+      const res = await fetch(`/api/doctor/edit/${reportId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reportType,
+          reportContent,
+          ...user,
+        }),
+      });
+
+      const msg = await res.json();
+      if (res.ok) {
+        // Refresh reports
+        document
+          .getElementById("viewForm")
+          .dispatchEvent(new Event("submit"));
+      } else {
+        alert(msg.message || msg.error);
+      }
+    }
+
+    document.getElementById("viewForm").onsubmit = async function (e) {
       e.preventDefault();
       const patientId = e.target.patientId.value;
-      const res = await fetch('/api/doctor/reports/' + encodeURIComponent(patientId));
+      const res = await fetch(
+        "/api/doctor/reports/" + encodeURIComponent(patientId)
+      );
       const data = await res.json();
-      
-      let html = '<h3>Reports for Patient ' + patientId + '</h3>';
+
+      let html = "<h3>Reports for Patient " + patientId + "</h3>";
       if (data.length === 0) {
-        html += '<div class="report-item"><p>No reports found for this patient.</p></div>';
+        html +=
+          '<div class="report-item"><p>No reports found for this patient.</p></div>';
       } else {
         html += '<ul class="report-list">';
-        data.forEach(r => {
+        data.forEach((r) => {
+          const canEdit = user.role === "chemist";
           html += `<li class="report-item">
-            <h4>${r.reportType}</h4>
-            <p><strong>Content:</strong> ${r.reportContent}</p>
-            <p><strong>Doctor ID:</strong> ${r.doctorId}</p>
-            <p><strong>Date:</strong> ${new Date(r.timestamp).toLocaleString()}</p>
-          </li>`;
+          <h4>${r.reportType}</h4>
+          <p><strong>Content:</strong> ${r.reportContent}</p>
+          <p><strong>Uploaded by:</strong> ${r.doctorName}</p>
+          <p><strong>Date:</strong> ${new Date(
+            r.timestamp
+          ).toLocaleString()}</p>
+          ${
+            canEdit
+              ? `
+            <button class="edit-button" onclick="showEditForm('${r.timestamp}')">Edit</button>
+            <div id="editForm-${r.timestamp}" class="edit-form">
+              <div class="form-group">
+                <label>Report Type</label>
+                <input type="text" name="reportType" value="${r.reportType}" required>
+              </div>
+              <div class="form-group">
+                <label>Report Content</label>
+                <textarea name="reportContent" required>${r.reportContent}</textarea>
+              </div>
+              <button type="button" onclick="editReport('${r.timestamp}')">Save Changes</button>
+            </div>
+          `
+              : ""
+          }
+        </li>`;
         });
-        html += '</ul>';
+        html += "</ul>";
       }
-      document.getElementById('reports').innerHTML = html;
+      document.getElementById("reports").innerHTML = html;
     };
   </script>
 </body>
